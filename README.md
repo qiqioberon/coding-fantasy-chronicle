@@ -1,73 +1,85 @@
-# Welcome to your Lovable project
+# Coding Fantasy Chronicle
 
-## Project info
+Landing website for the Coding Fantasy mobile game. This web app presents the game's fantasy-themed learning experience, shows in-game screenshots, and provides legal/account-management pages for players.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## What is in this web app
 
-## How can I edit this code?
+- Home page with hero section, feature highlights, and screenshot gallery.
+- Privacy Policy page.
+- Delete Account page that signs users in with Supabase Auth and invokes the `delete-user-account` Edge Function.
 
-There are several ways of editing your application.
+## Tech stack
 
-**Use Lovable**
+- Vite
+- React 18
+- TypeScript
+- Tailwind CSS
+- shadcn/ui
+- Framer Motion
+- Supabase JavaScript client
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## Routes
 
-Changes made via Lovable will be committed automatically to this repo.
+- `/` - marketing landing page
+- `/privacy-policy` - privacy policy content
+- `/delete-account` - account deletion flow for existing users
 
-**Use your preferred IDE**
+## Local development
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Requirements:
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- Node.js 18+ recommended
+- npm
 
-Follow these steps:
+Install and run:
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Build for production:
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```sh
+npm run build
+```
 
-**Use GitHub Codespaces**
+Preview the production build:
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+```sh
+npm run preview
+```
 
-## What technologies are used for this project?
+## Environment variables
 
-This project is built with:
+Create a local `.env` file with:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+```env
+VITE_SUPABASE_URL=your-supabase-project-url
+VITE_SUPABASE_PUBLISHABLE_KEY=your-supabase-anon-key
+```
 
-## How can I deploy this project?
+Notes:
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+- Do not commit `.env`.
+- Supabase functions and backend migrations are managed from the `coding-fantasy-mobile` repository.
+- This web project only needs the public client variables so it can authenticate users and call deployed Supabase functions.
 
-## Can I connect a custom domain to my Lovable project?
+## Assets
 
-Yes, you can!
+- Main branding logo: `src/assets/logo.png`
+- Landing page screenshots: `src/assets/screenshots/`
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## Testing
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Run unit tests with:
+
+```sh
+npm run test
+```
+
+Run lint checks with:
+
+```sh
+npm run lint
+```

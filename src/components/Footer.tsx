@@ -27,7 +27,7 @@ const Footer = () => (
           </Link>
           {/* TODO: Replace with actual support email */}
           <a
-            href="mailto:support@example.com"
+            href="mailto:asteriaacademy.id@gmail.com"
             className="text-cream-text/70 hover:text-gold-highlight transition-colors"
           >
             Contact

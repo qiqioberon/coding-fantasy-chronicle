@@ -1,6 +1,6 @@
 import PageLayout from "@/components/PageLayout";
 
-{/* [REPLACE WITH FINAL PRIVACY POLICY TEXT] — All section contents below are placeholders */}
+{/* [REPLACE WITH FINAL PRIVACY POLICY TEXT] — All section contents below are placeholders */ }
 
 const sections = [
   {
@@ -62,7 +62,7 @@ const sections = [
     title: "Contact Information",
     /* TODO: Replace with actual support email and company address */
     content:
-      "If you have questions about this privacy policy or your data, please contact us at support@example.com.",
+      "If you have questions about this privacy policy or your data, please contact us at asteriaacademy.id@gmail.com.",
   },
 ];
 
