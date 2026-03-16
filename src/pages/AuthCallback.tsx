@@ -4,11 +4,13 @@ import PageLayout from "@/components/PageLayout";
 import FantasyCard from "@/components/FantasyCard";
 import MagicButton from "@/components/MagicButton";
 import { supabase } from "@/integrations/supabase/client";
+import { useI18n } from "@/lib/i18n";
 import { getDefaultPostAuthPath, normalizeNextPath } from "@/lib/auth";
 
 const AuthCallback = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { copy } = useI18n();
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -30,7 +32,7 @@ const AuthCallback = () => {
 
       if (searchError || hashError) {
         if (!cancelled) {
-          setError(searchError ?? hashError ?? "Authentication failed.");
+          setError(searchError ?? hashError ?? copy.authCallback.genericError);
         }
         return;
       }
@@ -81,17 +83,17 @@ const AuthCallback = () => {
         }
 
         if (!session?.user) {
-          throw new Error("No authenticated session returned from Supabase.");
+          throw new Error(copy.authCallback.missingSessionError);
         }
 
         navigate(nextPath, { replace: true });
       } catch (authError) {
         if (!cancelled) {
-          const message =
+          setError(
             authError instanceof Error
               ? authError.message
-              : "Authentication failed.";
-          setError(message);
+              : copy.authCallback.genericError,
+          );
         }
       }
     };
@@ -101,32 +103,34 @@ const AuthCallback = () => {
     return () => {
       cancelled = true;
     };
-  }, [location.key, navigate]);
+  }, [copy.authCallback.genericError, copy.authCallback.missingSessionError, location.key, navigate]);
 
   return (
     <PageLayout dimmed>
-      <div className="container mx-auto px-4 py-20 max-w-xl">
+      <div className="container mx-auto max-w-xl px-4 py-20">
         <FantasyCard className="text-center">
           {error ? (
             <>
-              <h1 className="font-display text-2xl text-destructive mb-3">
-                Sign-In Failed
+              <h1 className="mb-3 font-display text-2xl text-destructive">
+                {copy.authCallback.signInFailed}
               </h1>
-              <p className="text-sm text-cream-text/80 font-body mb-6">
+              <p className="mb-6 text-sm font-body text-cream-text/80">
                 {error}
               </p>
               <Link to="/delete-account">
-                <MagicButton variant="secondary">Back to Delete Account</MagicButton>
+                <MagicButton variant="secondary">
+                  {copy.authCallback.backToDeleteAccount}
+                </MagicButton>
               </Link>
             </>
           ) : (
             <>
-              <div className="w-8 h-8 mx-auto border-4 border-gold-highlight border-t-transparent rounded-full animate-spin mb-5" />
-              <h1 className="font-display text-2xl text-white mb-3">
-                Finishing Sign-In
+              <div className="mx-auto mb-5 h-8 w-8 animate-spin rounded-full border-4 border-gold-highlight border-t-transparent" />
+              <h1 className="mb-3 font-display text-2xl text-white">
+                {copy.authCallback.finishingSignIn}
               </h1>
-              <p className="text-sm text-cream-text/80 font-body">
-                Completing your secure login and returning you to account deletion.
+              <p className="text-sm font-body text-cream-text/80">
+                {copy.authCallback.finishingDescription}
               </p>
             </>
           )}

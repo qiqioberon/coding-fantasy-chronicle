@@ -29,6 +29,12 @@ export type DeleteAccountSummaryLoadResult = {
   warning: string | null;
 };
 
+export type DeleteAccountSummaryCopy = {
+  fallbackNoEmail: string;
+  fallbackUsername: string;
+  summaryWarning: string;
+};
+
 type CountKey =
   | "badgeCount"
   | "levelNodeCount"
@@ -36,14 +42,12 @@ type CountKey =
   | "quizCount"
   | "bossCount";
 
-const SUMMARY_WARNING =
-  "Some account stats could not be loaded. You can still continue with account deletion.";
-
 export const createFallbackDeleteAccountSummary = (
   user: User,
+  copy: DeleteAccountSummaryCopy,
 ): DeleteAccountSummary => ({
-  username: deriveUsername(user),
-  email: user.email?.trim() || "No email available",
+  username: deriveUsername(user, copy.fallbackUsername),
+  email: user.email?.trim() || copy.fallbackNoEmail,
   avatarUrl: deriveAvatarUrl(user),
   level: null,
   exp: null,
@@ -59,8 +63,9 @@ export const createFallbackDeleteAccountSummary = (
 
 export const fetchDeleteAccountSummary = async (
   user: User,
+  copy: DeleteAccountSummaryCopy,
 ): Promise<DeleteAccountSummaryLoadResult> => {
-  const fallback = createFallbackDeleteAccountSummary(user);
+  const fallback = createFallbackDeleteAccountSummary(user, copy);
   const summary: DeleteAccountSummary = { ...fallback };
   let hadFailures = false;
 
@@ -138,7 +143,7 @@ export const fetchDeleteAccountSummary = async (
 
   return {
     summary,
-    warning: hadFailures ? SUMMARY_WARNING : null,
+    warning: hadFailures ? copy.summaryWarning : null,
   };
 };
 
@@ -176,7 +181,7 @@ const queryCount = async (
   return { count, error };
 };
 
-const deriveUsername = (user: User): string => {
+const deriveUsername = (user: User, fallbackUsername: string): string => {
   const metadataUsername = normalizeText(
     typeof user.user_metadata?.username === "string"
       ? user.user_metadata.username
@@ -194,7 +199,7 @@ const deriveUsername = (user: User): string => {
     return emailName;
   }
 
-  return "Adventurer";
+  return fallbackUsername;
 };
 
 const deriveAvatarUrl = (user: User): string | null => {
