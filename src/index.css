@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 245 45% 12%;
+    --foreground: 42 100% 95%;
+
+    --card: 245 35% 18%;
+    --card-foreground: 42 100% 95%;
+
+    --popover: 245 35% 18%;
+    --popover-foreground: 42 100% 95%;
+
+    --primary: 46 100% 61%;
+    --primary-foreground: 245 45% 12%;
+
+    --secondary: 263 50% 65%;
+    --secondary-foreground: 42 100% 95%;
+
+    --muted: 245 30% 22%;
+    --muted-foreground: 260 30% 70%;
+
+    --accent: 200 100% 80%;
+    --accent-foreground: 245 45% 12%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 260 40% 55%;
+    --input: 245 30% 25%;
+    --ring: 46 100% 61%;
+
+    --radius: 0.75rem;
+
+    /* Fantasy tokens */
+    --night-indigo: 248 50% 23%;
+    --royal-indigo: 245 40% 28%;
+    --mystic-purple: 248 40% 38%;
+    --lavender-border: 248 45% 68%;
+    --pink-lilac: 283 55% 65%;
+    --gold-highlight: 46 100% 61%;
+    --warm-gold: 42 100% 60%;
+    --cream-text: 48 100% 82%;
+    --parchment: 30 60% 91%;
+    --cyan-glow: 204 100% 80%;
+    --dark-stroke: 260 90% 5%;
+    --brown-gold-stroke: 30 100% 18%;
+
+    --shadow-magic: 0 0 30px hsl(260 60% 50% / 0.4);
+    --shadow-gold: 0 0 20px hsl(46 100% 61% / 0.3);
+    --glow-cyan: 0 0 40px hsl(204 100% 80% / 0.3);
+
+    --sidebar-background: 245 45% 12%;
+    --sidebar-foreground: 42 100% 95%;
+    --sidebar-primary: 46 100% 61%;
+    --sidebar-primary-foreground: 245 45% 12%;
+    --sidebar-accent: 248 40% 28%;
+    --sidebar-accent-foreground: 42 100% 95%;
+    --sidebar-border: 260 40% 55%;
+    --sidebar-ring: 46 100% 61%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body;
+    overflow-x: hidden;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Luckiest Guy', cursive;
+  }
+
+  .font-body {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .text-shadow-gold {
+    text-shadow: 0 2px 10px hsl(46 100% 61% / 0.5), 0 0 30px hsl(46 100% 61% / 0.2);
+  }
+
+  .text-shadow-magic {
+    text-shadow: 0 2px 15px hsl(260 60% 50% / 0.6), 0 0 40px hsl(283 55% 65% / 0.3);
+  }
+
+  .glass-panel {
+    @apply bg-card/60 backdrop-blur-xl border border-lavender-border/30 rounded-xl;
+    box-shadow: var(--shadow-magic), inset 0 1px 0 hsl(260 40% 55% / 0.2);
+  }
+
+  .fantasy-border {
+    @apply border-2 border-lavender-border/40 rounded-xl;
+    box-shadow: 0 0 15px hsl(260 40% 55% / 0.2), inset 0 0 15px hsl(260 40% 55% / 0.1);
+  }
+}
+
+/* Sparkle animation */
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
